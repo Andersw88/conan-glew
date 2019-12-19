@@ -6,6 +6,9 @@
 
 The GLEW library
 
+# Test repo to get glew working with visual studio 2019.
+Using snapshot found on https://github.com/simonfuhrmann/mve/issues/490.
+
 The packages generated with this **conanfile** can be found on [Bintray](https://bintray.com/bincrafters/public-conan/glew%3Abincrafters).
 
 ## For Users: Use this package

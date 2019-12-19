@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class GlewConan(ConanFile):
     name = "glew"
-    version = "2.1.0"
+    version = "2.2.0"
     description = "The GLEW library"
     url = "http://github.com/bincrafters/conan-glew"
     homepage = "http://github.com/nigels-com/glew"
@@ -14,7 +14,7 @@ class GlewConan(ConanFile):
     settings = "os", "arch", "build_type", "compiler"
     options = {"shared": [True, False]}
     default_options = {"shared": False}
-    _source_subfolder = "_source_subfolder"
+    _source_subfolder = "glew-2.2.0"
 
     def system_requirements(self):
         if tools.os_info.is_linux:
@@ -41,9 +41,10 @@ class GlewConan(ConanFile):
         del self.settings.compiler.cppstd
 
     def source(self):
-        release_name = "%s-%s" % (self.name, self.version)
-        tools.get("{0}/releases/download/{1}/{1}.tgz".format(self.homepage, release_name), sha256="04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95")
-        os.rename(release_name, self._source_subfolder)
+        tools.get("https://sourceforge.net/projects/glew/files/glew/snapshots/glew-20190928.tgz", sha256="7f6130ae31a86ac62eb19a28ebaa8c6c32c9705bcd2d90b4b41fa429e0d746df")
+        # release_name = "%s-%s" % (self.name, self.version)
+        # tools.get("{0}/releases/download/{1}/{1}.tgz".format(self.homepage, release_name), sha256="04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95")
+        # os.rename(release_name, self._source_subfolder)
         tools.replace_in_file("%s/build/cmake/CMakeLists.txt" % self._source_subfolder, "include(GNUInstallDirs)",
 """
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
